@@ -15,10 +15,10 @@ public class RegistrationService {
 
     public String register(RegistrationRequest request){
 
-        appUserService.signUpUser(new AppUser(request.firstName(), request.lastName(),request.email(),request.password(), AppUserRole.USER));
+        String token = appUserService.signUpUser(new AppUser(request.firstName(), request.lastName(), request.email(), request.password(), AppUserRole.USER));
 
 
-        return "registered";
+        return token;
     }
 
 
