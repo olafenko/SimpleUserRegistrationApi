@@ -2,6 +2,7 @@ package com.RegistrationAndMailingApi.AppUser.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "users")
+@NoArgsConstructor
 public class AppUser implements UserDetails {
 
     @Id
@@ -27,18 +28,11 @@ public class AppUser implements UserDetails {
     private String password;
     @Enumerated(value = EnumType.STRING)
     private AppUserRole appUserRole;
+    @Column(name = "locked")
     private boolean locked = false;
+    @Column(name = "enabled")
     private boolean enabled = false;
 
-    public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole, boolean locked, boolean enabled) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.appUserRole = appUserRole;
-        this.locked = locked;
-        this.enabled = enabled;
-    }
 
     public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole) {
         this.firstName = firstName;
@@ -65,7 +59,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
@@ -75,11 +69,11 @@ public class AppUser implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return enabled;
     }
 }

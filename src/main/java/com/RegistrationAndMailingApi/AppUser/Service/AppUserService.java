@@ -1,5 +1,6 @@
 package com.RegistrationAndMailingApi.AppUser.Service;
 
+import com.RegistrationAndMailingApi.AppUser.Model.AppUser;
 import com.RegistrationAndMailingApi.AppUser.Repo.AppUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,4 +21,16 @@ public class AppUserService implements UserDetailsService {
         return appUserRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(String.format(APP_USER_NOT_FOUND_MESSAGE,email)));
     }
+
+    public AppUser signUpUser(AppUser appUser){
+
+        if (appUserRepository.findByEmail(appUser.getEmail()).isPresent()){
+            throw new IllegalStateException("Email already taken");
+        }
+
+        return appUserRepository.save(appUser);
+
+    }
+
+
 }
