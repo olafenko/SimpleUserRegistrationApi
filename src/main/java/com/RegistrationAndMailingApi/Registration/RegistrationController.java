@@ -2,10 +2,8 @@ package com.RegistrationAndMailingApi.Registration;
 
 import com.RegistrationAndMailingApi.Registration.Service.RegistrationService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/registration")
@@ -15,10 +13,16 @@ public class RegistrationController {
     private final RegistrationService registrationService;
 
     @PostMapping
-    public String registerNewUser(@RequestBody RegistrationRequest request){
+    public ResponseEntity registerNewUser(@RequestBody RegistrationRequest request){
 
         return registrationService.register(request);
     }
+
+    @GetMapping("/confirm")
+    public ResponseEntity confirmToken(@RequestParam String token){
+        return registrationService.confirmToken(token);
+    }
+
 
 
 

@@ -1,8 +1,7 @@
 package com.RegistrationAndMailingApi.AppUser.Model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,9 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Data
-@Entity
+@Getter
+@Setter
+@EqualsAndHashCode
 @NoArgsConstructor
+@Entity
 public class AppUser implements UserDetails {
 
     @Id
