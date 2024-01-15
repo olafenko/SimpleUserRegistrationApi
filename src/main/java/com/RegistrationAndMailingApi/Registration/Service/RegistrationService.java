@@ -70,7 +70,7 @@ public class RegistrationService {
 
 
     private EmailValidator createEmailValidator(){
-        EmailValidator validator = new EmailValidator(List.of(new MinLengthRule(), new MaxLengthRule(),new SpecialCharsRule()));
+        EmailValidator validator = new EmailValidator(List.of(new SpecialCharsRule()));
         return validator;
     }
 
